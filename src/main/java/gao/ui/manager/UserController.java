@@ -5,7 +5,7 @@
 package gao.ui.manager;
 
 import gao.entity.Users;
-import poly.cafe.ui.manager.CrudController;
+import gao.ui.manager.CrudController;
 
 /**
  *
