@@ -18,6 +18,5 @@ public class XAuth {
             .enabled(true)
             .manager(true)
             .fullname("Lê Ngọc Hà")
-            .photo("trump-small.png")
             .build(); // biến user này sẽ được thay thế sau khi đăng nhập
 }

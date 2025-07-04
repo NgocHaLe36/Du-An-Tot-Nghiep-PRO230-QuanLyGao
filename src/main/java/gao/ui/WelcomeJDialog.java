@@ -4,6 +4,9 @@
  */
 package gao.ui;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author lengh
@@ -25,7 +28,7 @@ public class WelcomeJDialog extends javax.swing.JDialog implements WelcomeContro
             try {
                 for (var i = 0; i <= 100; i++) {
                     progressBar.setValue(i);
-                    Thread.sleep(10);
+                    Thread.sleep(30);
                 }
                 WelcomeJDialog.this.dispose();
             } catch (InterruptedException ex) {
@@ -73,7 +76,7 @@ public class WelcomeJDialog extends javax.swing.JDialog implements WelcomeContro
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(137, 137, 137)
                                 .addComponent(jLabel2)))
-                        .addGap(0, 105, Short.MAX_VALUE))
+                        .addGap(0, 114, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -88,7 +91,7 @@ public class WelcomeJDialog extends javax.swing.JDialog implements WelcomeContro
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();

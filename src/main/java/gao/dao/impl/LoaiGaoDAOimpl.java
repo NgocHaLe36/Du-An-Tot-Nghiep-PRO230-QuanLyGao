@@ -21,6 +21,7 @@ public class LoaiGaoDAOimpl implements LoaiGaoDAO {
     private final String deleteByIdSql = "DELETE FROM LoaiGao WHERE MaLoai=?";
     private final String findAllSql = "SELECT * FROM LoaiGao";
     private final String findByIdSql = findAllSql + " WHERE MaLoai=?";
+    private final String findByLoaiIdSql = "SELECT * FROM GAO WHERE MaLoai=?";
 
     @Override
     public LoaiGao create(LoaiGao entity) {
@@ -63,8 +64,7 @@ public class LoaiGaoDAOimpl implements LoaiGaoDAO {
 
     @Override
     public List<Gao> findByLoaiId(String maLoai) {
-        String sql = "SELECT * FROM Gao WHERE MaLoai=?";
-        return XQuery.getBeanList(Gao.class, sql, maLoai);
+        return XQuery.getBeanList(Gao.class, findByLoaiIdSql, maLoai);
     }
 
 }

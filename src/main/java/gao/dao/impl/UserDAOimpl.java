@@ -7,8 +7,8 @@ import java.util.List;
 
 public class UserDAOimpl implements UserDAO {
 
-    private final String insertSql = "INSERT INTO Users (Username, Password, Enabled, Fullname, Photo, Manager) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String updateSql = "UPDATE Users SET Password = ?, Enabled = ?, Fullname = ?, Photo = ?, Manager = ? WHERE Username = ?";
+    private final String insertSql = "INSERT INTO Users (Username, Password, Enabled, Fullname, Manager) VALUES (?, ?, ?, ?, ?)";
+    private final String updateSql = "UPDATE Users SET Password = ?, Enabled = ?, Fullname = ?, Manager = ? WHERE Username = ?";
     private final String deleteSql = "DELETE FROM Users WHERE Username = ?";
     private final String findAllSql = "SELECT * FROM Users";
     private final String findByIdSql = "SELECT * FROM Users WHERE Username = ?";
@@ -21,7 +21,6 @@ public class UserDAOimpl implements UserDAO {
             entity.getPassword(),
             entity.isEnabled(),
             entity.getFullname(),
-            entity.getPhoto(),
             entity.isManager()
         };
         XJdbc.executeUpdate(insertSql, args);
@@ -34,7 +33,6 @@ public class UserDAOimpl implements UserDAO {
             entity.getPassword(),
             entity.isEnabled(),
             entity.getFullname(),
-            entity.getPhoto(),
             entity.isManager(),
             entity.getUsername()
         };

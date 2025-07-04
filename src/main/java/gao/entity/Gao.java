@@ -14,8 +14,9 @@ public class Gao {
     private int maGao;          // Mã gạo (tự tăng)
     private String tenGao;      // Tên gạo
     private String xuatXu;      // Xuất xứ
-    private double gia;         // Giá (bán)
+    private double gia;         // Giá bán
     private String donViTinh;   // Đơn vị tính (Kg, bao,...)
     private int soLuongTon;     // Số lượng tồn kho
     private String maLoai;      // Mã loại gạo (FK)
+    private double giamGia;     // ✅ Giảm giá (sửa từ String thành double)
 }

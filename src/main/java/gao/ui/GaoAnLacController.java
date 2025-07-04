@@ -34,9 +34,9 @@ public interface GaoAnLacController {
     default void showChangePasswordJDialog(JFrame frame){
         this.showJDialog(new ChangePasswordJDialog(frame, true));
     }
-//    default void showSalesJDialog(JFrame frame){
-//        this.showJDialog(new SalesJDialog(frame, true));
-//    }
+    default void showSalesJDialog(JFrame frame){
+        this.showJDialog(new SalesJDialog(frame, true));
+    }
 //    default void showHistoryJDialog(JFrame frame){
 //        this.showJDialog(new HistoryJDialog(frame, true));
 //    }
@@ -53,6 +53,9 @@ public interface GaoAnLacController {
 //    default void showBillManagerJDialog(JFrame frame){
 //        this.showJDialog(new BillManagerJDialog(frame, true));
 //    }
+     default void showHoaDonJDialog(JFrame frame){
+        this.showJDialog(new HoaDonJDialog(frame, true));
+    }
     default void showUserManagerJDialog(JFrame frame){
         this.showJDialog(new UserManagerJDialog(frame, true));
     }

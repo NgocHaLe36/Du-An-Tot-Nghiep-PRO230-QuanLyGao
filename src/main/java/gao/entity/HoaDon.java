@@ -1,6 +1,6 @@
 package gao.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +11,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class HoaDon {
-    private int maHD;
-    private Date ngayLap;
-    private int maNV;
-    private double tongTien;
+
+    private Integer cardId;
+    private Integer maHd;
+    private String username;
+    private Timestamp thoiGianVao;
+    private Timestamp thoiGianRa;
+    private Integer trangThai;
+
+    public static final String DATE_PATTERN = "HH:mm:ss dd-MM-yyyy";
 }

@@ -20,7 +20,7 @@ import lombok.Setter;
 public class UserManagerJDialog extends javax.swing.JDialog implements UserController{
      @Getter
     @Setter
-    String folder = "images";
+//    String folder = "images";
     UserDAO dao = new UserDAOimpl();
     List<Users> items = List.of();
 
@@ -42,7 +42,6 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
                 item.getUsername(),
                 item.getPassword(),
                 item.getFullname(),
-                item.getPhoto(),
                 item.isManager() ? "Quản lý" : "Nhân viên",
                 item.isEnabled() ? "Hoạt động" : "Tạm dừng",
                 false
@@ -102,7 +101,6 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
 
         txtFullname.setText(entity.getFullname());
 
-        String icon = entity.getPhoto();
 //        lblPicture.setText("");
 //        lblPicture.setToolTipText(icon);
 //        XIcon.setIcon(lblPicture, new File(this.folder, icon));
@@ -128,7 +126,6 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
 
         entity.setFullname(txtFullname.getText());
 
-        entity.setPhoto(lblPicture.getToolTipText());
         boolean vaiTro = false;
         if (rdoQuanLy.isSelected()) {
             vaiTro = true;
@@ -224,7 +221,6 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
         String username = tblUsers.getValueAt(row, 0).toString();
         String password = tblUsers.getValueAt(row, 1).toString();
         String fullname = tblUsers.getValueAt(row, 2).toString();
-        String photo = tblUsers.getValueAt(row, 3).toString();
         String role = tblUsers.getValueAt(row, 4).toString();
         String status = tblUsers.getValueAt(row, 5).toString();
 
@@ -309,17 +305,17 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
 
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên đăng nhập", "Mật khẩu", "Họ và tên ", "Hình ảnh ", "Vai trò ", "Trạng thái ", "null"
+                "Tên đăng nhập", "Mật khẩu", "Họ và tên ", "Vai trò ", "Trạng thái ", "null"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -576,11 +572,11 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+            .addComponent(tabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+            .addComponent(tabs)
         );
 
         pack();

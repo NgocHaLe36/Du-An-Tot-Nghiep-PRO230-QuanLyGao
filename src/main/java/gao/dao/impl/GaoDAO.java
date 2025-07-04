@@ -12,6 +12,6 @@ import java.util.List;
  * @author lengh
  */
 public interface GaoDAO extends CrudDAO<Gao, String>{
-//    public List<Gao> findByLoaiId(String maLoai);
+    public List<Gao> findByLoaiId(String maLoai);
 
 }

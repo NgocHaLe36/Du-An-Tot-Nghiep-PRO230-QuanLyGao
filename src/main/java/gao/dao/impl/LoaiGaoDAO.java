@@ -12,7 +12,8 @@ import java.util.List;
  *
  * @author lengh
  */
-public interface LoaiGaoDAO extends CrudDAO<LoaiGao, String>{
-    public List<Gao> findByLoaiId(String maLoai);
+public interface LoaiGaoDAO extends CrudDAO<LoaiGao, String> {
+
+    List<Gao> findByLoaiId(String maLoai);
 
 }

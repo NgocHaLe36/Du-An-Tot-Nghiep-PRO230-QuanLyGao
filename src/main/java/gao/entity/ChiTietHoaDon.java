@@ -10,9 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class ChiTietHoaDon {
-    private int maHD;
-    private int maGao;
-    private int soLuong;
-    private double donGia;
-    private double thanhTien;
+    private int maCT;
+    private int maHD;        // MaHD khoá ngoại tới HoaDon
+    private int maGao;       // MaGao khoá ngoại tới Gao
+    private double donGia;   // Đơn giá
+    private double giamGia;  // Giảm giá
+    private int soLuong;     // Số lượng
+    private double thanhTien;// Thành tiền = (đơn giá - giảm giá) * số lượng
+    private String TenGao;
 }

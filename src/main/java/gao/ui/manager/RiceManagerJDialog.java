@@ -79,17 +79,17 @@ public class RiceManagerJDialog extends javax.swing.JDialog implements RiceContr
 
         tblRice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Loại gạo ", "Mã gạo ", "Tên gạo ", "Xuất xứ", "Đơn giá", "Đơn vị tính ", "Số lượng tồn", "null"
+                "Loại gạo ", "Mã gạo ", "Tên gạo ", "Xuất xứ", "Đơn giá", "Đơn vị tính ", "Số lượng tồn", "Giảm giá", "null"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -272,7 +272,7 @@ public class RiceManagerJDialog extends javax.swing.JDialog implements RiceContr
                         .addComponent(btnDelete1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClear1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnMoveFirst1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMovePrevious1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,7 +338,7 @@ public class RiceManagerJDialog extends javax.swing.JDialog implements RiceContr
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate1)
                     .addComponent(btnUpdate1)
@@ -556,48 +556,12 @@ public class RiceManagerJDialog extends javax.swing.JDialog implements RiceContr
                 item.getGia(),
                 item.getDonViTinh(),
                 item.getSoLuongTon(),
+                item.getGiamGia(),
                 null
             });
         });
 //        this.clear();
     }
-
-//    public void showDetail() {
-//    try {
-//        int index = tblDrinks.getSelectedRow();
-//        if (index < 0) {
-//            return;
-//        }
-//
-//        Drink d = items.get(index); // items là List<Drink>
-//
-//        txtMaDoUong.setText(d.getId());
-//        txtTenDoUong.setText(d.getName());
-//        txtDonGia.setText(String.valueOf((int) d.getPrice())); // format để tránh 25000.0
-//        // txtDescription.setText(d.getDescription()); // bỏ mô tả
-//        sldGiamGia.setValue(d.getDiscount());
-//
-//        if (d.isAvailable()) {
-//            rdoSanCo.setSelected(true);
-//            rdoHetHang.setSelected(false);
-//        } else {
-//            rdoSanCo.setSelected(false);
-//            rdoHetHang.setSelected(true);
-//        }
-//
-//        Category cat = d.getCategory();
-//        for (int i = 0; i < cboCategories.getItemCount(); i++) {
-//            Category c = (Category) cboCategories.getItemAt(i);
-//            if (c.getId().equals(cat.getId())) {
-//                cboCategories.setSelectedIndex(i);
-//                break;
-//            }
-//        }
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        JOptionPane.showMessageDialog(this, "Lỗi khi hiển thị chi tiết đồ uống!");
-//    }
-//}
     @Override
     public void open() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

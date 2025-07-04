@@ -14,6 +14,5 @@ public class Users {
     private String password;
     private boolean enabled;
     private String fullname;
-    private String photo;
     private boolean manager;
 }
