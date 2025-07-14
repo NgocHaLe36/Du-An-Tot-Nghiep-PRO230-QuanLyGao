@@ -27,9 +27,8 @@ public class CardDAOimpl implements CardDAO {
     @Override
     public void update(Card entity) {
         Object[] values = {
-            entity.getId(),
-            entity.getStatus()
-
+            entity.getStatus(),
+            entity.getId()
         };
         XJdbc.executeUpdate(updateSql, values);
     }

@@ -170,14 +170,14 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/trump-small.png"))); // NOI18N
         jPanel2.add(jLabel4);
-        jLabel4.setBounds(20, 30, 217, 219);
+        jLabel4.setBounds(30, 40, 217, 219);
 
         jLabel5.setBackground(new java.awt.Color(102, 51, 0));
         jLabel5.setFont(new java.awt.Font("Nirmala UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 51, 0));
         jLabel5.setText("GAO AN LAC");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(50, 260, 160, 32);
+        jLabel5.setBounds(70, 270, 160, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +186,7 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

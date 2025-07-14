@@ -608,11 +608,12 @@ public class CardsManagerJDialog extends javax.swing.JDialog implements CardCont
     @Override
     public void update() {
         try {
-            Card entity = this.getForm();   // Lấy dữ liệu từ form
-            dao.update(entity);              // Gọi hàm cập nhật trong DAO
-            this.fillToTable();              // Load lại bảng
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!"); // Thông báo
+            Card entity = this.getForm();  // Lấy dữ liệu từ form
+            dao.update(entity);             // Gọi DAO cập nhật
+            this.fillToTable();             // Load lại bảng
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
         } catch (Exception e) {
+            e.printStackTrace(); // Log lỗi ra console
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại: " + e.getMessage());
         }
     }
@@ -692,7 +693,7 @@ public class CardsManagerJDialog extends javax.swing.JDialog implements CardCont
     }
 
     @Override
-    public void moveLast() {                              
+    public void moveLast() {
         this.moveTo(tblCards.getRowCount() - 1);
     }
 
