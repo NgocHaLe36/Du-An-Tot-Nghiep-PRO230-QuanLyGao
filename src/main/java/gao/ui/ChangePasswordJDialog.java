@@ -4,8 +4,8 @@
  */
 package gao.ui;
 
-import gao.dao.impl.UserDAO;
 import gao.dao.impl.UserDAOimpl;
+import gao.dao.UserDAO;
 import gao.util.XAuth;
 import gao.util.XDialog;
 

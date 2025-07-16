@@ -4,9 +4,9 @@
  */
 package gao.ui.manager;
 
-import gao.dao.impl.ChiTietHoaDonDAO;
+import gao.dao.ChiTietHoaDonDAO;
+import gao.dao.HoaDonDAO;
 import gao.dao.impl.ChiTietHoaDonDAOimpl;
-import gao.dao.impl.HoaDonDAO;
 import gao.dao.impl.HoaDonDAOimpl;
 import gao.entity.ChiTietHoaDon;
 import gao.entity.HoaDon;
@@ -154,7 +154,7 @@ public class HoaDonManagerJDialog extends JDialog implements HoaDonController {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã hóa đơn", "Thẻ số", "Thời điểm tạo toán ", "Thời điểm thanh toán ", "Trạng thái", "Email", ""
+                "Mã hóa đơn", "Thẻ số", "Thời điểm tạo ", "Thời điểm thanh toán ", "Trạng thái", "Email", ""
             }
         ) {
             Class[] types = new Class [] {

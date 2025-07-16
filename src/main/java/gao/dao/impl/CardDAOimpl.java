@@ -1,5 +1,6 @@
 package gao.dao.impl;
 
+import gao.dao.*;
 import gao.entity.Card;
 import gao.entity.HoaDon;
 import gao.util.XJdbc;

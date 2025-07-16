@@ -1,5 +1,6 @@
 package gao.dao.impl;
 
+import gao.dao.*;
 import gao.entity.ChiTietHoaDon;
 import gao.util.XJdbc;
 import gao.util.XQuery;

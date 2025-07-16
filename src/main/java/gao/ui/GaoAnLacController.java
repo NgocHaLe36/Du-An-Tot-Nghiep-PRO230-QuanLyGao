@@ -4,6 +4,10 @@
  */
 package gao.ui;
 
+import gao.ui.manager.CardsManagerJDialog;
+import gao.ui.manager.HoaDonManagerJDialog;
+import gao.ui.manager.LoaiGaoManagerJDialog;
+import gao.ui.manager.RiceManagerJDialog;
 import gao.ui.manager.UserManagerJDialog;
 import gao.util.XDialog;
 import javax.swing.JDialog;
@@ -14,49 +18,59 @@ import javax.swing.JFrame;
  * @author lengh
  */
 public interface GaoAnLacController {
-     void init();
 
-    default void exit(){
-        if(XDialog.confirm("Bạn muốn kết thúc?")){
-        System.exit(0);
+    void init();
+
+    default void exit() {
+        if (XDialog.confirm("Bạn muốn kết thúc?")) {
+            System.exit(0);
+        }
     }
-    }
-    default void showJDialog(JDialog dialog){
+
+    default void showJDialog(JDialog dialog) {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
-    default void showWelcomeJDialog(JFrame frame){
+
+    default void showWelcomeJDialog(JFrame frame) {
         this.showJDialog(new WelcomeJDialog(frame, true));
     }
-    default void showLoginJDialog(JFrame frame){
+
+    default void showLoginJDialog(JFrame frame) {
         this.showJDialog(new LoginJDialog(frame, true));
     }
-    default void showChangePasswordJDialog(JFrame frame){
+
+    default void showChangePasswordJDialog(JFrame frame) {
         this.showJDialog(new ChangePasswordJDialog(frame, true));
     }
-    default void showSalesJDialog(JFrame frame){
+
+    default void showSalesJDialog(JFrame frame) {
         this.showJDialog(new SalesJDialog(frame, true));
     }
 //    default void showHistoryJDialog(JFrame frame){
 //        this.showJDialog(new HistoryJDialog(frame, true));
 //    }
 //
-//    default void showDrinkManagerJDialog(JFrame frame){
-//        this.showJDialog(new DrinkManagerJDialog(frame, true));
-//    }
-//    default void showCategoryManagerJDialog(JFrame frame){
-//        this.showJDialog(new CategoryManagerJDialog(frame, true));
-//    }
-//    default void showCardManagerJDialog(JFrame frame){
-//        this.showJDialog(new CardManagerJDialog(frame, true));
-//    }
-//    default void showBillManagerJDialog(JFrame frame){
-//        this.showJDialog(new BillManagerJDialog(frame, true));
-//    }
-     default void showHoaDonJDialog(JFrame frame){
+
+    default void showRiceManagerJDialog(JFrame frame) {
+        this.showJDialog(new RiceManagerJDialog(frame, true));
+    }
+
+    default void showLoaiGaoManagerJDialog(JFrame frame) {
+        this.showJDialog(new LoaiGaoManagerJDialog(frame, true));
+    }
+    default void showCardManagerJDialog(JFrame frame){
+        this.showJDialog(new CardsManagerJDialog(frame, true));
+    }
+    default void showHoaDonManagerJDialog(JFrame frame){
+        this.showJDialog(new HoaDonManagerJDialog(frame, true));
+    }
+
+    default void showHoaDonJDialog(JFrame frame) {
         this.showJDialog(new HoaDonJDialog(frame, true));
     }
-    default void showUserManagerJDialog(JFrame frame){
+
+    default void showUserManagerJDialog(JFrame frame) {
         this.showJDialog(new UserManagerJDialog(frame, true));
     }
 //    default void showRevenueManagerJDialog(JFrame frame){

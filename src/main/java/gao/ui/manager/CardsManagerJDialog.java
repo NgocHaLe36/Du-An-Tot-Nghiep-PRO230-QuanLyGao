@@ -4,7 +4,7 @@
  */
 package gao.ui.manager;
 
-import gao.dao.impl.CardDAO;
+import gao.dao.CardDAO;
 import gao.dao.impl.CardDAOimpl;
 import gao.entity.Card;
 import gao.util.XDialog;

@@ -4,6 +4,8 @@
  */
 package gao.dao;
 
+import gao.dao.*;
+
 /**
  *
  * @author lengh

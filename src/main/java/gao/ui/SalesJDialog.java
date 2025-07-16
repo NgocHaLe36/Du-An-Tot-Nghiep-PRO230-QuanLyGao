@@ -4,9 +4,9 @@
  */
 package gao.ui;
 
-import gao.dao.impl.CardDAO;
+import gao.dao.CardDAO;
+import gao.dao.HoaDonDAO;
 import gao.dao.impl.CardDAOimpl;
-import gao.dao.impl.HoaDonDAO;
 import gao.dao.impl.HoaDonDAOimpl;
 import gao.entity.Card;
 import gao.entity.HoaDon;

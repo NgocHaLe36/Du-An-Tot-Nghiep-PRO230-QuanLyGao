@@ -4,6 +4,7 @@
  */
 package gao.dao.impl;
 
+import gao.dao.*;
 import gao.entity.Gao;
 import gao.entity.LoaiGao;
 import gao.util.XJdbc;

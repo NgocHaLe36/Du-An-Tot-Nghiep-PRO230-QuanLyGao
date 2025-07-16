@@ -1,5 +1,6 @@
-package gao.dao.impl;
+package gao.dao;
 
+import gao.dao.*;
 import gao.entity.HoaDon;
 import java.util.Date;
 import java.util.List;

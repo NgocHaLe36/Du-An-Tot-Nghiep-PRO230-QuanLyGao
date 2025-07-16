@@ -4,7 +4,7 @@
  */
 package gao.ui;
 
-import gao.dao.impl.UserDAO;
+import gao.dao.UserDAO;
 import gao.dao.impl.UserDAOimpl;
 import gao.entity.Users;
 import gao.util.XAuth;

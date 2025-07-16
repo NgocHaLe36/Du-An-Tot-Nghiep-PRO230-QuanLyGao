@@ -122,7 +122,7 @@
                       <Table columnCount="7" rowCount="4">
                         <Column editable="true" title="M&#xe3; h&#xf3;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                         <Column editable="true" title="Th&#x1ebb; s&#x1ed1;" type="java.lang.Object"/>
-                        <Column editable="true" title="Th&#x1edd;i &#x111;i&#x1ec3;m t&#x1ea1;o to&#xe1;n " type="java.lang.Object"/>
+                        <Column editable="true" title="Th&#x1edd;i &#x111;i&#x1ec3;m t&#x1ea1;o " type="java.lang.Object"/>
                         <Column editable="true" title="Th&#x1edd;i &#x111;i&#x1ec3;m thanh to&#xe1;n " type="java.lang.Object"/>
                         <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
                         <Column editable="true" title="Email" type="java.lang.Object"/>

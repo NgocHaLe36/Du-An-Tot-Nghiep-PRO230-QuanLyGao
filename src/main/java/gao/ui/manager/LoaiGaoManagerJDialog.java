@@ -4,7 +4,7 @@
  */
 package gao.ui.manager;
 
-import gao.dao.impl.LoaiGaoDAO;
+import gao.dao.LoaiGaoDAO;
 import gao.dao.impl.LoaiGaoDAOimpl;
 import gao.entity.LoaiGao;
 import gao.util.XDialog;

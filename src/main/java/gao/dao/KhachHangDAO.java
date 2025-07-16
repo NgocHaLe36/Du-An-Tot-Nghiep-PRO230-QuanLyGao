@@ -4,10 +4,13 @@
  */
 package gao.dao;
 
+import gao.dao.*;
+import gao.entity.KhachHang;
+
 /**
  *
  * @author lengh
  */
-public interface KhachHangDAO {
+public interface KhachHangDAO extends CrudDAO<KhachHang, String>{
     
 }

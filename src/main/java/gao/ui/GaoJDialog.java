@@ -4,10 +4,10 @@
  */
 package gao.ui;
 
+import gao.dao.GaoDAO;
+import gao.dao.LoaiGaoDAO;
 import gao.dao.impl.ChiTietHoaDonDAOimpl;
-import gao.dao.impl.GaoDAO;
 import gao.dao.impl.GaoDAOimpl;
-import gao.dao.impl.LoaiGaoDAO;
 import gao.dao.impl.LoaiGaoDAOimpl;
 import gao.entity.ChiTietHoaDon;
 import gao.entity.Gao;
