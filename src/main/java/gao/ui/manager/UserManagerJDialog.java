@@ -40,7 +40,8 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
                 item.getFullname(),
                 item.isManager() ? "Quản lý" : "Nhân viên",
                 item.isEnabled() ? "Hoạt động" : "Tạm dừng",
-                false
+                null,
+                Boolean.FALSE // Chọn (Select) checkbox
             };
             model.addRow(rowData);
         });
@@ -73,10 +74,27 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
     @Override
     public void deleteCheckedItems() {
         if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+            java.util.List<String> usernamesToDelete = new java.util.ArrayList<>();
             for (int i = 0; i < tblUsers.getRowCount(); i++) {
-                if ((Boolean) tblUsers.getValueAt(i, 6)) {
-                    dao.deleteById(items.get(i).getUsername());
+                Object checked = tblUsers.getValueAt(i, 6);
+                if (checked instanceof Boolean && (Boolean) checked) {
+                    usernamesToDelete.add(tblUsers.getValueAt(i, 0).toString());
                 }
+            }
+            boolean hadConstraintError = false;
+            for (String username : usernamesToDelete) {
+                try {
+                    dao.deleteById(username);
+                } catch (Exception ex) {
+                    if (ex.getMessage() != null && ex.getMessage().contains("REFERENCE constraint")) {
+                        hadConstraintError = true;
+                    } else {
+                        XDialog.alert("Lỗi khi xóa người dùng: " + ex.getMessage());
+                    }
+                }
+            }
+            if (hadConstraintError) {
+                XDialog.alert("Không thể xóa một số người dùng vì đã phát sinh hóa đơn hoặc dữ liệu liên quan.");
             }
             this.fillToTable();
         }
@@ -214,11 +232,17 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
     }
 
     void showDetail(int row) {
-        String username = tblUsers.getValueAt(row, 0).toString();
-        String password = tblUsers.getValueAt(row, 1).toString();
-        String fullname = tblUsers.getValueAt(row, 2).toString();
-        String role = tblUsers.getValueAt(row, 4).toString();
-        String status = tblUsers.getValueAt(row, 5).toString();
+        Object usernameObj = tblUsers.getValueAt(row, 0);
+        Object passwordObj = tblUsers.getValueAt(row, 1);
+        Object fullnameObj = tblUsers.getValueAt(row, 2);
+        Object roleObj = tblUsers.getValueAt(row, 3);
+        Object statusObj = tblUsers.getValueAt(row, 4);
+
+        String username = usernameObj != null ? usernameObj.toString() : "";
+        String password = passwordObj != null ? passwordObj.toString() : "";
+        String fullname = fullnameObj != null ? fullnameObj.toString() : "";
+        String role = roleObj != null ? roleObj.toString() : "";
+        String status = statusObj != null ? statusObj.toString() : "";
 
         txtUsername.setText(username);
         txtPassword.setText(password);
@@ -226,7 +250,7 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
         txtFullname.setText(fullname);
 
         // Vai trò
-        if (role.equals("Quản lý")) {
+        if ("Quản lý".equals(role)) {
             rdoQuanLy.setSelected(true);
         } else {
             rdoNhanVien.setSelected(true);
@@ -267,6 +291,7 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
         btnCheckAll = new javax.swing.JButton();
         btnUncheckAll = new javax.swing.JButton();
         btnDeleteCheckedItems = new javax.swing.JButton();
+        btnRemoveSelected = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -300,21 +325,28 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
 
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, Boolean.FALSE},
+                {null, null, null, null, null, null, Boolean.FALSE},
+                {null, null, null, null, null, null, Boolean.FALSE},
+                {null, null, null, null, null, null, Boolean.FALSE}
             },
             new String [] {
-                "Tên đăng nhập", "Mật khẩu", "Họ và tên ", "Vai trò ", "Trạng thái ", "null"
+                "Tên đăng nhập", "Mật khẩu", "Họ và tên ", "Vai trò ", "Trạng thái ", "null", "Chọn"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            Class<?>[] types = new Class<?> [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Only the "Chọn" (Select) column is editable
+                return column == 6;
             }
         });
         tblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -345,18 +377,27 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
             }
         });
 
+        btnRemoveSelected.setText("Xóa mục đang chọn");
+        btnRemoveSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveSelectedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(314, 314, 314)
+                .addGap(180, 180, 180)
                 .addComponent(btnCheckAll)
                 .addGap(18, 18, 18)
                 .addComponent(btnUncheckAll)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteCheckedItems)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRemoveSelected)
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -369,7 +410,8 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCheckAll)
                     .addComponent(btnUncheckAll)
-                    .addComponent(btnDeleteCheckedItems))
+                    .addComponent(btnDeleteCheckedItems)
+                    .addComponent(btnRemoveSelected))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -682,6 +724,29 @@ public class UserManagerJDialog extends javax.swing.JDialog implements UserContr
     private javax.swing.JButton btnMovePrevious;
     private javax.swing.JButton btnUncheckAll;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnRemoveSelected;
+    // Remove current selected user
+    private void btnRemoveSelectedActionPerformed(java.awt.event.ActionEvent evt) {
+        int row = tblUsers.getSelectedRow();
+        if (row >= 0) {
+            String username = tblUsers.getValueAt(row, 0).toString();
+            if (XDialog.confirm("Bạn thực sự muốn xóa mục đang chọn?")) {
+                try {
+                    dao.deleteById(username);
+                    this.fillToTable();
+                    this.clear();
+                } catch (Exception ex) {
+                    if (ex.getMessage() != null && ex.getMessage().contains("REFERENCE constraint")) {
+                        XDialog.alert("Không thể xóa người dùng này vì đã phát sinh hóa đơn hoặc dữ liệu liên quan.");
+                    } else {
+                        XDialog.alert("Lỗi khi xóa người dùng: " + ex.getMessage());
+                    }
+                }
+            }
+        } else {
+            XDialog.alert("Vui lòng chọn một dòng để xóa.");
+        }
+    }
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

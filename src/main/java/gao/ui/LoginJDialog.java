@@ -29,8 +29,6 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
         String password = txtMatKhau.getText();
         UserDAO dao = new UserDAOimpl();
         Users user = dao.findByUsername(username);
-//        System.out.println("password nhap: " + password);
-//        System.out.println("password tra ve tu table user: " + user.getPassword());
         if (user == null) {
             XDialog.alert("Sai tên đăng nhập!");
         } else if (!password.equals(user.getPassword())) {
@@ -39,6 +37,7 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
             XDialog.alert("Tài khoản của bạn đang tạm dừng!");
         } else {
             XAuth.user = user; // duy trì user đăng nhập
+            isLogin = true;
             this.dispose();
         }
     }
@@ -49,8 +48,17 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
     public LoginJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         setTitle("Đăng nhập");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                if (!isLogin) {
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     /**
