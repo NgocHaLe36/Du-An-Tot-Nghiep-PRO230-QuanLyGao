@@ -13,6 +13,9 @@ import javax.swing.JPanel;
  * @author lengh
  */
 public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacController {
+    // GlassPane loading overlay
+    private JPanel loadingOverlay;
+
 
     /**
      * Creates new form GaoAnLacJFrame1
@@ -21,7 +24,46 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         initComponents();
         init();
         setTitle("Gạo An Lạc");
+        setupLoadingOverlay();
     }
+
+    private void setupLoadingOverlay() {
+        loadingOverlay = new JPanel() {
+            @Override
+            public boolean isOpaque() { return false; }
+        };
+        loadingOverlay.setLayout(new java.awt.GridBagLayout());
+        loadingOverlay.setBackground(new java.awt.Color(0,0,0,80)); // semi-transparent
+        loadingOverlay.setVisible(false);
+
+        // Block mouse/keyboard events when visible
+        loadingOverlay.addMouseListener(new java.awt.event.MouseAdapter() {});
+        loadingOverlay.addKeyListener(new java.awt.event.KeyAdapter() {});
+
+        // Use JProgressBar as spinner
+        javax.swing.JProgressBar progressBar = new javax.swing.JProgressBar();
+        progressBar.setIndeterminate(true);
+        progressBar.setPreferredSize(new java.awt.Dimension(80, 20));
+        progressBar.setOpaque(false);
+        progressBar.setBorderPainted(false);
+        loadingOverlay.add(progressBar, new java.awt.GridBagConstraints());
+
+        // Set as GlassPane
+        setGlassPane(loadingOverlay);
+    }
+
+    public void showLoadingOverlay() {
+        loadingOverlay.setVisible(true);
+        getGlassPane().setVisible(true);
+        getGlassPane().repaint();
+    }
+
+    public void hideLoadingOverlay() {
+        loadingOverlay.setVisible(false);
+        getGlassPane().setVisible(false);
+    }
+
+    // (setupSidebarLayout removed, revert to NetBeans form layout)
 
     @Override
     public void init() {
@@ -310,29 +352,14 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        /* Set the FlatLaf look and feel */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GaoAnLacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GaoAnLacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GaoAnLacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GaoAnLacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            // Import FlatLaf
+            com.formdev.flatlaf.FlatLightLaf.setup();
+            javax.swing.UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize FlatLaf");
         }
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -157,7 +157,7 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
         jLabel1.setText("ĐỔI MẬT KHẨU ");
         jLabel1.setPreferredSize(new java.awt.Dimension(261, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/shield.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/padlock.png"))); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(206, 240, 252));
 
