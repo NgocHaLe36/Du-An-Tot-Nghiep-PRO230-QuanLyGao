@@ -6,6 +6,8 @@ package gao.ui;
 
 import gao.util.XAuth;
 import gao.util.XIcon;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -22,7 +24,6 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
      */
     public GaoAnLacJFrame() {
         initComponents();
-        init();
         setTitle("Gạo An Lạc");
         setupLoadingOverlay();
     }
@@ -66,11 +67,33 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
     // (setupSidebarLayout removed, revert to NetBeans form layout)
 
     @Override
+    public void showLoginJDialog(JFrame frame) {
+        LoginJDialog loginDialog = new LoginJDialog(frame, true);
+        loginDialog.setLocationRelativeTo(null);
+        loginDialog.setVisible(true);
+        
+        if (!loginDialog.isLogin) {
+            XAuth.user = null;
+            this.dispose();
+            return;
+        }
+    }
+
+    @Override
     public void init() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(XIcon.getIcon("logo1.png").getImage());
         this.setLocationRelativeTo(null);
         this.showWelcomeJDialog(this);
         this.showLoginJDialog(this);
+        
+        if (XAuth.user == null) {
+            this.dispose();
+            return;
+        }
+        
+        this.setVisible(true);
+        
         JPanel pnlManager = new JPanel();
 //        XIcon.setIcon(lblPhoto, "photos/" + XAuth.user.getPhoto());
         lblFullname.setText(XAuth.user.getFullname());
@@ -132,6 +155,11 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         jButton17.setBackground(new java.awt.Color(204, 204, 204));
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/cancel.png"))); // NOI18N
         jButton17.setText("KẾT THÚC");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/up.png"))); // NOI18N
@@ -348,6 +376,10 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        this.exit();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -361,10 +393,10 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
             System.err.println("Failed to initialize FlatLaf");
         }
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GaoAnLacJFrame().setVisible(true);
+                GaoAnLacJFrame frame = new GaoAnLacJFrame();
+                frame.init();
             }
         });
     }

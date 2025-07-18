@@ -46,19 +46,12 @@ public class LoginJDialog extends javax.swing.JDialog implements LoginController
      * Creates new form LoginJDialog
      */
     public LoginJDialog(java.awt.Frame parent, boolean modal) {
+        
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(parent);
         setTitle("Đăng nhập");
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosed(java.awt.event.WindowEvent e) {
-                if (!isLogin) {
-                    System.exit(0);
-                }
-            }
-        });
     }
 
     /**
