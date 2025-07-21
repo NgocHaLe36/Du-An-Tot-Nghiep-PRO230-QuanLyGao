@@ -306,11 +306,8 @@ public class HoaDonJDialog extends javax.swing.JDialog implements HoaDonControll
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+               /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -318,18 +315,21 @@ public class HoaDonJDialog extends javax.swing.JDialog implements HoaDonControll
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HoaDonJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(HoaDonJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
+        /* Tạo đối tượng HoaDon mẫu */
+        HoaDon sampleHoaDon = HoaDon.builder()
+                .maHd(1) // Thay số 1 bằng mã hóa đơn hợp lệ trong DB của bạn
+                .username("ngocha")
+                .trangThai(0)
+                .thoiGianVao(new Timestamp(System.currentTimeMillis()))
+                .build();
+
         /* Create and display the dialog */
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 HoaDonJDialog dialog = new HoaDonJDialog(new javax.swing.JFrame(), true);
@@ -368,7 +368,7 @@ public class HoaDonJDialog extends javax.swing.JDialog implements HoaDonControll
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    @Setter
+        @Setter
     HoaDon hoaDon;
     List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
 
@@ -418,13 +418,22 @@ public class HoaDonJDialog extends javax.swing.JDialog implements HoaDonControll
         DefaultTableModel model = (DefaultTableModel) tblBillDetails.getModel();
         model.setRowCount(0);
         chiTietHoaDons.forEach(ct -> {
-            Object[] row = {false,
+            double rawGiamGia = ct.getGiamGia();
+            System.out.println("rawGiamGia = " + rawGiamGia);
+
+            double giamGia = (rawGiamGia > 1) ? rawGiamGia / 100.0 : rawGiamGia;
+            if (giamGia < 0 || giamGia > 1) {
+                giamGia = 0; // fallback nếu sai lệch
+            }
+
+            Object[] row = {
+                false,
                 ct.getMaCT(),
-                ct.getTenGao(), // bạn cần đảm bảo đã join lấy TenGao trong DAO
+                ct.getTenGao(),
                 String.format("%,.0f", ct.getDonGia()),
-                String.format("%.0f%%", ct.getGiamGia() * 100),
+                String.format("%.0f%%", giamGia * 100),
                 ct.getSoLuong(),
-                String.format("%,.0f", ct.getSoLuong() * ct.getDonGia() * (1 - ct.getGiamGia()))
+                String.format("%,.0f", ct.getSoLuong() * ct.getDonGia() * (1 - giamGia))
             };
             model.addRow(row);
         });

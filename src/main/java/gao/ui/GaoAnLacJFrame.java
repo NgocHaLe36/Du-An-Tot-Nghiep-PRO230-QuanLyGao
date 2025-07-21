@@ -7,12 +7,15 @@ package gao.ui;
 import gao.util.XAuth;
 import gao.util.XIcon;
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 /**
  *
  * @author lengh
  */
 public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacController {
+
+    private JPanel loadingOverlay;
 
     /**
      * Creates new form GaoAnLacJFrame1
@@ -30,10 +33,11 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         this.showWelcomeJDialog(this);
         this.showLoginJDialog(this);
         JPanel pnlManager = new JPanel();
-//        XIcon.setIcon(lblPhoto, "photos/" + XAuth.user.getPhoto());
-        lblFullname.setText(XAuth.user.getFullname());
-        if (!XAuth.user.isManager()) {
-            pnlCenter.remove(pnlManager);
+        if (XAuth.user != null) {
+            lblFullname.setText(XAuth.user.getFullname());
+            if (!XAuth.user.isManager()) {
+                pnlCenter.remove(pnlManager);
+            }
         }
     }
 
@@ -86,6 +90,7 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         jLabel1.setText("GẠO AN LẠC ");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/trump-small.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         jButton17.setBackground(new java.awt.Color(204, 204, 204));
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/cancel.png"))); // NOI18N
@@ -103,6 +108,11 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         jButton5.setBackground(new java.awt.Color(204, 204, 204));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/history.png"))); // NOI18N
         jButton5.setText("LỊCH SỬ");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(204, 204, 204));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/padlock.png"))); // NOI18N
@@ -128,18 +138,38 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         jButton9.setBackground(new java.awt.Color(204, 204, 204));
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/rice.png"))); // NOI18N
         jButton9.setText("GẠO");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton11.setBackground(new java.awt.Color(204, 204, 204));
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/user.png"))); // NOI18N
         jButton11.setText("NGƯỜI SỬ DỤNG");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(204, 204, 204));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/wheat-sack.png"))); // NOI18N
         jButton3.setText("LOẠI GẠO ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton10.setBackground(new java.awt.Color(204, 204, 204));
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/revenue.png"))); // NOI18N
         jButton10.setText("DOANH THU");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton12.setBackground(new java.awt.Color(204, 204, 204));
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/identification-card.png"))); // NOI18N
@@ -153,14 +183,29 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
         jButton13.setBackground(new java.awt.Color(204, 204, 204));
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/receipt.png"))); // NOI18N
         jButton13.setText("PHIẾU NHẬP HÀNG");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setBackground(new java.awt.Color(204, 204, 204));
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/supplier.png"))); // NOI18N
         jButton14.setText("NHÀ CUNG CẤP");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setBackground(new java.awt.Color(204, 204, 204));
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/service.png"))); // NOI18N
         jButton15.setText("KHÁCH HÀNG");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         pnlCenter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -186,6 +231,9 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,12 +243,9 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
                             .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(lblFullname, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
+                        .addGap(41, 41, 41)
+                        .addComponent(lblFullname, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -221,11 +266,11 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(pnlCenter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(152, 152, 152))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +278,7 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addGap(23, 23, 23)
                         .addComponent(lblFullname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -287,8 +332,8 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        //        this.showHoaDonJDialog(this);
+//         TODO add your handling code here:
+        this.showHoaDonJDialog(this);
         this.showSalesJDialog(this);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -299,16 +344,54 @@ public class GaoAnLacJFrame extends javax.swing.JFrame implements GaoAnLacContro
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        this.showUserManagerJDialog(this);
+        this.showHoaDonManagerJDialog(this);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        this.showCardManagerJDialog(this);
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.showLichSuJDialog(this);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        this.showRiceManagerJDialog(this);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.showLoaiGaoManagerJDialog(this);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        this.showKhachHangMannageJDialog(this);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        this.showDoanhThuMannageJDialog(this);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        this.showPhieuNhapMannageJDialog(this);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        this.showUserManagerJDialog(this);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        this.showNhaCungCapJDialog(this);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

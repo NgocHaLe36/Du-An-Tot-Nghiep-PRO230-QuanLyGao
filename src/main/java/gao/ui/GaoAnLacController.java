@@ -5,8 +5,11 @@
 package gao.ui;
 
 import gao.ui.manager.CardsManagerJDialog;
+import gao.ui.manager.DoanhThuMannagerJDialog;
 import gao.ui.manager.HoaDonManagerJDialog;
+import gao.ui.manager.KhachHangManagerJDialog;
 import gao.ui.manager.LoaiGaoManagerJDialog;
+import gao.ui.manager.PhieuNhapManagerJDialog;
 import gao.ui.manager.RiceManagerJDialog;
 import gao.ui.manager.UserManagerJDialog;
 import gao.util.XDialog;
@@ -47,10 +50,10 @@ public interface GaoAnLacController {
     default void showSalesJDialog(JFrame frame) {
         this.showJDialog(new SalesJDialog(frame, true));
     }
-//    default void showHistoryJDialog(JFrame frame){
-//        this.showJDialog(new HistoryJDialog(frame, true));
-//    }
-//
+
+    default void showLichSuJDialog(JFrame frame) {
+        this.showJDialog(new LichSuJDialog(frame, true));
+    }
 
     default void showRiceManagerJDialog(JFrame frame) {
         this.showJDialog(new RiceManagerJDialog(frame, true));
@@ -59,10 +62,12 @@ public interface GaoAnLacController {
     default void showLoaiGaoManagerJDialog(JFrame frame) {
         this.showJDialog(new LoaiGaoManagerJDialog(frame, true));
     }
-    default void showCardManagerJDialog(JFrame frame){
+
+    default void showCardManagerJDialog(JFrame frame) {
         this.showJDialog(new CardsManagerJDialog(frame, true));
     }
-    default void showHoaDonManagerJDialog(JFrame frame){
+
+    default void showHoaDonManagerJDialog(JFrame frame) {
         this.showJDialog(new HoaDonManagerJDialog(frame, true));
     }
 
@@ -73,7 +78,20 @@ public interface GaoAnLacController {
     default void showUserManagerJDialog(JFrame frame) {
         this.showJDialog(new UserManagerJDialog(frame, true));
     }
-//    default void showRevenueManagerJDialog(JFrame frame){
-//        this.showJDialog(new RevenueManagerJDialog(frame, true));
-//    }
+
+    default void showDoanhThuMannageJDialog(JFrame frame) {
+        this.showJDialog(new DoanhThuMannagerJDialog(frame, true));
+    }
+
+    default void showKhachHangMannageJDialog(JFrame frame) {
+        this.showJDialog(new KhachHangManagerJDialog(frame, true));
+    }
+
+    default void showPhieuNhapMannageJDialog(JFrame frame) {
+        this.showJDialog(new PhieuNhapManagerJDialog(frame, true));
+    }
+
+    default void showNhaCungCapJDialog(JFrame frame) {
+        this.showJDialog(new NhaCungCapJDialog(frame, true));
+    }
 }

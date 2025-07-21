@@ -1,47 +1,64 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package gao.dao.impl;
 
-import gao.dao.*;
+import gao.dao.KhachHangDAO;
 import gao.entity.KhachHang;
+import gao.util.XJdbc;
+import gao.util.XQuery;
+import java.sql.Date;
 import java.util.List;
 
-/**
- *
- * @author lengh
- */
-public class KhachHangDAOimpl implements KhachHangDAO{
+public class KhachHangDAOimpl implements KhachHangDAO {
+
+    private final String insertSql = "INSERT INTO KhachHang (HoTen, SoDT, DiaChi, Email, NgayDangKy) VALUES (?, ?, ?, ?, ?)";
+    private final String updateSql = "UPDATE KhachHang SET HoTen = ?, SoDT = ?, DiaChi = ?, Email = ?, NgayDangKy = ? WHERE MaKH = ?";
+    private final String deleteSql = "DELETE FROM KhachHang WHERE MaKH = ?";
+    private final String selectAllSql = "SELECT * FROM KhachHang";
+    private final String selectByIdSql = "SELECT * FROM KhachHang WHERE MaKH = ?";
+    private final String selectByUsernameSql = "SELECT * FROM KhachHang WHERE Email = ?"; // Tạm dùng Email làm "username"
 
     @Override
     public KhachHang create(KhachHang entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Object[] args = {
+            entity.getHoTen(),
+            entity.getSoDT(),
+            entity.getDiaChi(),
+            entity.getEmail(),
+            entity.getNgayDangKy()
+        };
+        XJdbc.executeUpdate(insertSql, args);
+        return entity;
     }
 
     @Override
     public void update(KhachHang entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Object[] args = {
+            entity.getHoTen(),
+            entity.getSoDT(),
+            entity.getDiaChi(),
+            entity.getEmail(),
+            entity.getNgayDangKy(),
+            entity.getMaKH()
+        };
+        XJdbc.executeUpdate(updateSql, args);
     }
 
     @Override
     public void deleteById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        XJdbc.executeUpdate(deleteSql, id);
     }
 
     @Override
     public List<KhachHang> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return XQuery.getBeanList(KhachHang.class, selectAllSql);
     }
 
     @Override
     public KhachHang findById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return XQuery.getSingleBean(KhachHang.class, selectByIdSql, id);
     }
 
     @Override
     public KhachHang findByUsername(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return XQuery.getSingleBean(KhachHang.class, selectByUsernameSql, username);
     }
-    
 }

@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class Gao {
 
-    private int maGao;          // Mã gạo (tự tăng)
-    private String tenGao;      // Tên gạo
-    private String xuatXu;      // Xuất xứ
-    private double gia;         // Giá bán
-    private String donViTinh;   // Đơn vị tính (Kg, bao,...)
-    private int soLuongTon;     // Số lượng tồn kho
-    private String maLoai;      // Mã loại gạo (FK)
-    private double giamGia;     // ✅ Giảm giá (sửa từ String thành double)
+    private int maGao;          
+    private String tenGao;     
+    private String xuatXu;      
+    private double gia;        
+    private String donViTinh;   
+    private int soLuongTon;     
+    private String maLoai;      
+    private double giamGia;     
 }

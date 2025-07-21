@@ -4,13 +4,22 @@
  */
 package gao.ui.manager;
 
+import gao.dao.KhachHangDAO;
+import gao.dao.impl.KhachHangDAOimpl;
 import gao.entity.KhachHang;
+import gao.util.XDate;
+import gao.util.XDialog;
+import java.awt.Dialog;
+import java.sql.Date;
+import java.util.HashSet;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author lengh
  */
-public class KhachHangManagerJDialog extends javax.swing.JDialog implements KhachHangController{
+public class KhachHangManagerJDialog extends javax.swing.JDialog implements KhachHangController {
 
     /**
      * Creates new form KhachHangManagetJDialog
@@ -18,6 +27,7 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
     public KhachHangManagerJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillToTable();
     }
 
     /**
@@ -31,28 +41,28 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblKhachHang = new javax.swing.JTable();
         btnCheckAll = new javax.swing.JButton();
         btnUncheckAll = new javax.swing.JButton();
         btnDeleteCheckedItems = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtSoDT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtHoten = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtDiachi = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtNdk = new javax.swing.JTextField();
         btnMoveFirst = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
@@ -75,10 +85,20 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(242, 231, 228));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -97,7 +117,12 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKhachHangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblKhachHang);
 
         btnCheckAll.setBackground(new java.awt.Color(204, 204, 204));
         btnCheckAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/selection.png"))); // NOI18N
@@ -130,26 +155,26 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
                 .addComponent(btnCheckAll)
                 .addGap(18, 18, 18)
                 .addComponent(btnUncheckAll)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteCheckedItems)
-                .addGap(62, 62, 62))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCheckAll, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUncheckAll, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeleteCheckedItems, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -163,7 +188,7 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("DANH SÁCH", jPanel3);
+        tabs.addTab("DANH SÁCH", jPanel3);
 
         jPanel6.setBackground(new java.awt.Color(255, 241, 231));
 
@@ -283,17 +308,17 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField1))
+                    .addComponent(txtSoDT, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(txtEmail)
+                    .addComponent(txtMaKH))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField6))
+                    .addComponent(txtHoten, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(txtDiachi)
+                    .addComponent(txtNdk))
                 .addGap(56, 56, 56))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +334,7 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
                         .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,28 +346,28 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSoDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtHoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(81, 81, 81))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtDiachi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(28, 28, 28)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNdk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoveFirst)
@@ -351,7 +376,7 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
                     .addComponent(btnMoveLast))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -365,28 +390,36 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("BIỂU MẪU ", jPanel4);
+        tabs.addTab("BIỂU MẪU ", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 3, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -446,6 +479,34 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
         // TODO add your handling code here:
         this.moveLast();
     }//GEN-LAST:event_btnMoveLastActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        open();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.edit();
+        }
+        int selectedRow = tblKhachHang.getSelectedRow();
+        if (selectedRow >= 0) {
+            showDetail(selectedRow);
+        }
+
+    }//GEN-LAST:event_formMouseClicked
+
+    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            this.edit();
+        }
+        int selectedRow = tblKhachHang.getSelectedRow();
+        if (selectedRow >= 0) {
+            showDetail(selectedRow);
+        }
+    }//GEN-LAST:event_tblKhachHangMouseClicked
 
     /**
      * @param args the command line arguments
@@ -516,103 +577,205 @@ public class KhachHangManagerJDialog extends javax.swing.JDialog implements Khac
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable tblKhachHang;
+    private javax.swing.JTextField txtDiachi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHoten;
+    private javax.swing.JTextField txtMaKH;
+    private javax.swing.JTextField txtNdk;
+    private javax.swing.JTextField txtSoDT;
     // End of variables declaration//GEN-END:variables
+    KhachHangDAO dao = new KhachHangDAOimpl();
+    List<KhachHang> items = List.of();
 
     @Override
     public void open() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.setLocationRelativeTo(null);
+        this.fillToTable();
+        this.clear();
+        setTitle("Khách Hàng");
     }
 
     @Override
     public void setForm(KhachHang entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        txtMaKH.setText(entity.getMaKH() != null ? entity.getMaKH().toString() : "");
+        txtHoten.setText(entity.getHoTen() != null ? entity.getHoTen() : "");
+        txtSoDT.setText(entity.getSoDT() != null ? entity.getSoDT() : "");
+        txtDiachi.setText(entity.getDiaChi() != null ? entity.getDiaChi() : "");
+        txtEmail.setText(entity.getEmail() != null ? entity.getEmail() : "");
+        txtNdk.setText(entity.getNgayDangKy() != null ? entity.getNgayDangKy().toString() : "");
     }
 
     @Override
     public KhachHang getForm() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KhachHang entity = new KhachHang();
+        entity.setMaKH(Integer.valueOf(txtMaKH.getText()));
+        entity.setHoTen(txtHoten.getText());
+        entity.setSoDT(txtSoDT.getText());
+        entity.setDiaChi(txtDiachi.getText());
+        entity.setEmail(txtEmail.getText());
+
+        try {
+            java.util.Date utilDate = XDate.toDate(txtNdk.getText(), "yyyy-MM-dd");
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            entity.setNgayDangKy(sqlDate);
+        } catch (Exception e) {
+            XDialog.confirm("Ngày không hợp lệ. Định dạng đúng: yyyy-MM-dd");
+            return null;
+        }
+        return entity;
     }
 
     @Override
     public void fillToTable() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+        items = dao.findAll();
+        items.forEach(item -> {
+            Object[] rowData = {
+                item.getMaKH(),
+                item.getHoTen(),
+                item.getSoDT(),
+                item.getDiaChi(),
+                item.getEmail(),
+                item.getNgayDangKy(),
+                false
+            };
+            model.addRow(rowData);
+        });
     }
 
     @Override
     public void edit() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KhachHang entity = items.get(tblKhachHang.getSelectedRow());
+        this.setForm(entity);
+        this.setEditable(true);
+        tabs.setSelectedIndex(1);
     }
 
     @Override
     public void create() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KhachHang entity = this.getForm();
+        dao.create(entity);
+        this.fillToTable();
+        this.clear();
     }
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        KhachHang entity = this.getForm();
+        dao.update(entity);
+        this.fillToTable();
     }
 
     @Override
     public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (XDialog.confirm("Bạn thực sự muốn xóa?")) {
+            String id = txtMaKH.getText();
+            dao.deleteById(id);
+            this.fillToTable();
+            this.clear();
+        }
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.setForm(new KhachHang());
+        this.setEditable(false);
     }
 
     @Override
     public void setEditable(boolean editable) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        txtMaKH.setEditable(!editable);
+        btnCreate.setEnabled(!editable);
+        btnUpdate.setEnabled(editable);
+        btnDelete.setEnabled(editable);
+
+        int rowCount = tblKhachHang.getRowCount();
+        btnMoveFirst.setEnabled(editable && rowCount > 0);
+        btnMovePrevious.setEnabled(editable && rowCount > 0);
+        btnMoveNext.setEnabled(editable && rowCount > 0);
+        btnMoveLast.setEnabled(editable && rowCount > 0);
     }
 
     @Override
     public void checkAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.setCheckedAll(true);
+    }
+
+    private void setCheckedAll(boolean checked) {
+        for (int i = 0; i < tblKhachHang.getRowCount(); i++) {
+            tblKhachHang.setValueAt(checked, i, 6);
+        }
     }
 
     @Override
     public void uncheckAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.setCheckedAll(false);
     }
 
     @Override
     public void deleteCheckedItems() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (XDialog.confirm("Bạn thực sự muốn xóa các mục chọn?")) {
+            for (int i = 0; i < tblKhachHang.getRowCount(); i++) {
+                if ((Boolean) tblKhachHang.getValueAt(i, 6)) {
+                    dao.deleteById(items.get(i).getMaKH().toString());
+                }
+            }
+            this.fillToTable();
+        }
     }
 
     @Override
     public void moveFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.moveTo(0);
     }
 
     @Override
     public void movePrevious() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.moveTo(tblKhachHang.getSelectedRow() - 1);
     }
 
     @Override
     public void moveNext() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.moveTo(tblKhachHang.getSelectedRow() + 1);
     }
 
     @Override
     public void moveLast() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.moveTo(tblKhachHang.getRowCount() - 1);
     }
 
     @Override
-    public void moveTo(int rowIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void moveTo(int index) {
+        if (index < 0) {
+            this.moveLast();
+        } else if (index >= tblKhachHang.getRowCount()) {
+            this.moveFirst();
+        } else {
+            tblKhachHang.clearSelection();
+            tblKhachHang.setRowSelectionInterval(index, index);
+            this.edit();
+        }
     }
+
+    public void showDetail(int row) {
+        // Lấy dữ liệu từ JTable theo từng cột
+        String maKH = tblKhachHang.getValueAt(row, 1).toString(); // cột 1: MaKH
+        String hoTen = tblKhachHang.getValueAt(row, 2).toString(); // cột 2: HoTen
+        String soDT = tblKhachHang.getValueAt(row, 3).toString(); // cột 3: SoDT
+        String diaChi = tblKhachHang.getValueAt(row, 4).toString(); // cột 4: DiaChi
+        String email = tblKhachHang.getValueAt(row, 5).toString(); // cột 5: Email
+        String ngayDangKy = tblKhachHang.getValueAt(row, 6).toString(); // cột 6: NgayDangKy
+
+        // Gán vào form
+        txtMaKH.setText(maKH);
+        txtHoten.setText(hoTen);
+        txtSoDT.setText(soDT);
+        txtDiachi.setText(diaChi);
+        txtEmail.setText(email);
+        txtNdk.setText(ngayDangKy);
+    }
+
 }

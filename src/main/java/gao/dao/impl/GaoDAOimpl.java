@@ -62,7 +62,7 @@ public class GaoDAOimpl implements GaoDAO {
 
     @Override
     public Gao findByUsername(String username) {
-        return null; // Không áp dụng cho gạo
+        return null; 
     }
 
     public List<Gao> findByLoaiId(String maLoai) {

@@ -4,7 +4,6 @@
  */
 package gao.dao;
 
-import gao.dao.*;
 import gao.entity.Users;
 
 /**

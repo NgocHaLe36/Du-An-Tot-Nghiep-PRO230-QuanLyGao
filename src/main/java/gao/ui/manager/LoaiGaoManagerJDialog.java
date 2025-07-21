@@ -9,6 +9,7 @@ import gao.dao.impl.LoaiGaoDAOimpl;
 import gao.entity.LoaiGao;
 import gao.util.XDialog;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -46,14 +47,15 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
         jLabel2 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
-        btnCreate = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
-        btnMoveFirst = new javax.swing.JButton();
         btnMovePrevious = new javax.swing.JButton();
         btnMoveNext = new javax.swing.JButton();
         btnMoveLast = new javax.swing.JButton();
+        btnMoveFirst = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        btnCreate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,6 +63,8 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
                 formWindowOpened(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(255, 241, 231));
 
         tblCategories.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,6 +92,8 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
         });
         jScrollPane1.setViewportView(tblCategories);
 
+        btnCheckAll.setBackground(new java.awt.Color(204, 204, 204));
+        btnCheckAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/selection.png"))); // NOI18N
         btnCheckAll.setText("Chọn tất cả");
         btnCheckAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +101,8 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
             }
         });
 
+        btnUncheckAll.setBackground(new java.awt.Color(204, 204, 204));
+        btnUncheckAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/cancel.png"))); // NOI18N
         btnUncheckAll.setText("Bỏ chọn tất cả");
         btnUncheckAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +110,8 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
             }
         });
 
+        btnDeleteCheckedItems.setBackground(new java.awt.Color(204, 204, 204));
+        btnDeleteCheckedItems.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/delete.png"))); // NOI18N
         btnDeleteCheckedItems.setText("Xóa các mục chọn");
         btnDeleteCheckedItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,67 +125,41 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(314, 314, 314)
+                .addGap(61, 61, 61)
                 .addComponent(btnCheckAll)
                 .addGap(18, 18, 18)
                 .addComponent(btnUncheckAll)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteCheckedItems)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCheckAll)
-                    .addComponent(btnUncheckAll)
-                    .addComponent(btnDeleteCheckedItems))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnCheckAll, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUncheckAll, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteCheckedItems, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         tabs.addTab("DANH SÁCH", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 241, 231));
 
         jLabel1.setText("Mã loại ");
 
         jLabel2.setText("Tên loại ");
 
-        btnCreate.setText("Tạo mới");
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
-        btnUpdate.setText("Cập nhật");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Xóa");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnClear.setText("Làm mới");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-
-        btnMoveFirst.setText("|<");
-        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveFirstActionPerformed(evt);
-            }
-        });
-
+        btnMovePrevious.setBackground(new java.awt.Color(255, 255, 204));
         btnMovePrevious.setText("<<");
         btnMovePrevious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +167,7 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
             }
         });
 
+        btnMoveNext.setBackground(new java.awt.Color(255, 255, 204));
         btnMoveNext.setText(">>");
         btnMoveNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,12 +175,83 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
             }
         });
 
+        btnMoveLast.setBackground(new java.awt.Color(255, 255, 204));
         btnMoveLast.setText(">|");
         btnMoveLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMoveLastActionPerformed(evt);
             }
         });
+
+        btnMoveFirst.setBackground(new java.awt.Color(255, 255, 204));
+        btnMoveFirst.setText("|<");
+        btnMoveFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveFirstActionPerformed(evt);
+            }
+        });
+
+        jPanel11.setBackground(new java.awt.Color(255, 241, 231));
+
+        btnCreate.setBackground(new java.awt.Color(204, 204, 204));
+        btnCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/add.png"))); // NOI18N
+        btnCreate.setText("Tạo mới");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(204, 204, 204));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/delete.png"))); // NOI18N
+        btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(204, 204, 204));
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/update.png"))); // NOI18N
+        btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnClear.setBackground(new java.awt.Color(204, 204, 204));
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gao/icons/new.png"))); // NOI18N
+        btnClear.setText("Làm mới");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdate)
+                .addGap(18, 18, 18)
+                .addComponent(btnClear)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnCreate)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -204,24 +260,23 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1))
-                            .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                            .addComponent(txtName))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCreate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                        .addGap(186, 186, 186)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(65, 65, 65))
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
                         .addComponent(btnMoveFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMovePrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,30 +284,28 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
                         .addComponent(btnMoveNext, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMoveLast, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(49, 49, 49))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreate)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete)
-                    .addComponent(btnClear)
                     .addComponent(btnMoveFirst)
                     .addComponent(btnMovePrevious)
                     .addComponent(btnMoveNext)
                     .addComponent(btnMoveLast))
-                .addGap(17, 17, 17))
+                .addGap(36, 36, 36)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         tabs.addTab("BIỂU MẪU ", jPanel2);
@@ -265,7 +318,7 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(tabs)
         );
 
         pack();
@@ -282,6 +335,11 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
         }
     }//GEN-LAST:event_tblCategoriesMouseClicked
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        open();
+    }//GEN-LAST:event_formWindowOpened
+
     private void btnCheckAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckAllActionPerformed
         // TODO add your handling code here:
         this.checkAll();
@@ -296,31 +354,6 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
         // TODO add your handling code here:
         this.deleteCheckedItems();
     }//GEN-LAST:event_btnDeleteCheckedItemsActionPerformed
-
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        this.create();
-    }//GEN-LAST:event_btnCreateActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        this.update();
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        this.delete();
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-        this.clear();
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
-        // TODO add your handling code here:
-        this.moveFirst();
-    }//GEN-LAST:event_btnMoveFirstActionPerformed
 
     private void btnMovePreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovePreviousActionPerformed
         // TODO add your handling code here:
@@ -337,10 +370,34 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
         this.moveLast();
     }//GEN-LAST:event_btnMoveLastActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void btnMoveFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveFirstActionPerformed
         // TODO add your handling code here:
-        open();
-    }//GEN-LAST:event_formWindowOpened
+        this.moveFirst();
+    }//GEN-LAST:event_btnMoveFirstActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        this.create();
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        this.delete();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        this.update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        this.clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,6 +456,7 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane tabs;
@@ -494,9 +552,16 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
 
     @Override
     public void update() {
-        LoaiGao entity = this.getForm();
-        dao.update(entity);
-        this.fillToTable();
+        try {
+            LoaiGao entity = this.getForm();  // Lấy dữ liệu từ form
+            dao.update(entity);             // Gọi DAO cập nhật
+            this.fillToTable();             // Load lại bảng
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            e.printStackTrace(); // Log lỗi ra console
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại: " + e.getMessage());
+        };
+        fillToTable();
     }
 
     @Override
@@ -519,13 +584,13 @@ public class LoaiGaoManagerJDialog extends javax.swing.JDialog implements LoaiGa
     public void setEditable(boolean editable) {
         txtId.setEnabled(!editable);
         btnCreate.setEnabled(!editable);
-        btnUpdate.setEnabled(editable);
-        btnDelete.setEnabled(editable);
-        int rowCount = tblCategories.getRowCount();
-        btnMoveFirst.setEnabled(editable && rowCount > 0);
-        btnMovePrevious.setEnabled(editable && rowCount > 0);
-        btnMoveNext.setEnabled(editable && rowCount > 0);
-        btnMoveLast.setEnabled(editable && rowCount > 0);
+        btnUpdate.setEnabled(!editable);
+        btnDelete.setEnabled(!editable);
+//        int rowCount = tblCategories.getRowCount();
+//        btnMoveFirst.setEnabled(editable && rowCount > 0);
+//        btnMovePrevious.setEnabled(editable && rowCount > 0);
+//        btnMoveNext.setEnabled(editable && rowCount > 0);
+//        btnMoveLast.setEnabled(editable && rowCount > 0);
     }
 
     @Override

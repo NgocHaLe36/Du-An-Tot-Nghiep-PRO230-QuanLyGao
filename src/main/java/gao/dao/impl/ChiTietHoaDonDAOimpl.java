@@ -12,7 +12,19 @@ public class ChiTietHoaDonDAOimpl implements ChiTietHoaDonDAO {
     private final String updateSql = "UPDATE ChiTietHoaDon SET DonGia=?, GiamGia=?, SoLuong=? WHERE MaHD=? AND MaGao=?";
     private final String deleteSql = "DELETE FROM ChiTietHoaDon WHERE MaCT=?";
 
-    private final String findAllSql = "SELECT cthd.*, g.TenGao AS TenGao FROM ChiTietHoaDon cthd JOIN Gao g ON g.MaGao = cthd.MaGao";
+    private final String findAllSql = """
+    SELECT 
+        cthd.*, 
+        g.TenGao AS TenGao, 
+        (cthd.SoLuong * cthd.DonGia * (1 - 
+            CASE 
+                WHEN cthd.GiamGia > 1 THEN cthd.GiamGia / 100.0 
+                ELSE cthd.GiamGia 
+            END
+        )) AS ThanhTien 
+    FROM ChiTietHoaDon cthd 
+    JOIN Gao g ON g.MaGao = cthd.MaGao
+""";
     private final String findByHoaDonIdSql = findAllSql + " WHERE cthd.MaHD=?";
     private final String findByGaoIdSql = findAllSql + " WHERE cthd.MaGao=?";
     private final String findByIdSql = findAllSql + " WHERE cthd.MaHD=? AND cthd.MaGao=?";

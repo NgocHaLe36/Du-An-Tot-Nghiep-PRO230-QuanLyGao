@@ -57,6 +57,7 @@ public class SalesJDialog extends javax.swing.JDialog implements SalesController
             }
         });
 
+        pnlCard.setBackground(new java.awt.Color(255, 255, 255));
         pnlCard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pnlCard.setLayout(new java.awt.GridLayout(0, 6, 5, 5));
 
@@ -135,9 +136,9 @@ public class SalesJDialog extends javax.swing.JDialog implements SalesController
     @Override
     public void showHoaDonJDialog(int cardId) {
         HoaDonDAO dao = new HoaDonDAOimpl();
-        HoaDon bill = dao.findServicingByCardId(cardId); // tải bill đang phục vụ của thẻ
+        HoaDon bill = dao.findServicingByCardId(cardId); // Tải bill đang phục vụ của thẻ
         HoaDonJDialog dialog = new HoaDonJDialog((Frame) this.getOwner(), true);
-//        dialog.setHoaDon(bill); // Cần khai báo vào BillJDialog @Setter Bill bill
+        dialog.setHoaDon(bill); // ✅ TRUYỀN bill vào dialog trước khi hiển thị
         dialog.setVisible(true);
     }
 
@@ -157,10 +158,10 @@ public class SalesJDialog extends javax.swing.JDialog implements SalesController
         btnCard.setPreferredSize(new Dimension(0, 80));
 
         // Trạng thái 0 là đang hoạt động → enable
-        btnCard.setEnabled(card.getStatus()== 0);
+        btnCard.setEnabled(card.getStatus() == 0);
 
         // Đặt màu nền tùy theo trạng thái
-        btnCard.setBackground(card.getId()== 0 ? Color.PINK : Color.PINK);
+        btnCard.setBackground(card.getId() == 0 ? Color.PINK : Color.PINK);
 
         // Truyền cardID làm lệnh hành động
         btnCard.setActionCommand(String.valueOf(card.getId()));

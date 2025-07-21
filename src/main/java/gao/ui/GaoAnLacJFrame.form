@@ -68,6 +68,10 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="175" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jButton2" max="32767" attributes="0"/>
@@ -80,15 +84,11 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="lblFullname" min="-2" pref="244" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="197" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -115,12 +115,12 @@
                           <Component id="pnlCenter" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="194" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="194" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,7 +130,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Component id="lblFullname" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -199,6 +199,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/gao/icons/trump-small.png"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="jLabel2"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton17">
@@ -236,6 +237,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="L&#x1eca;CH S&#x1eec;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton7">
           <Properties>
@@ -285,6 +289,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="G&#x1ea0;O"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton11">
           <Properties>
@@ -296,6 +303,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="NG&#x1af;&#x1edc;I S&#x1eec; D&#x1ee4;NG"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -307,6 +317,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="LO&#x1ea0;I G&#x1ea0;O "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton10">
           <Properties>
@@ -318,6 +331,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="DOANH THU"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton12">
           <Properties>
@@ -343,6 +359,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="PHI&#x1ebe;U NH&#x1eac;P H&#xc0;NG"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton13ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton14">
           <Properties>
@@ -354,6 +373,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="NH&#xc0; CUNG C&#x1ea4;P"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton14ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton15">
           <Properties>
@@ -365,6 +387,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="KH&#xc1;CH H&#xc0;NG"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="pnlCenter">
           <Properties>

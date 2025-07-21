@@ -5,11 +5,12 @@
 package gao.dao;
 
 import gao.dao.*;
+import gao.entity.PhieuNhap;
 
 /**
  *
  * @author lengh
  */
-public interface PhieuNhapDAO {
+public interface PhieuNhapDAO extends CrudDAO<PhieuNhap, String>{
     
 }

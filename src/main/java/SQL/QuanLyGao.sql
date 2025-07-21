@@ -32,7 +32,7 @@ INSERT INTO Users(Username, Password, Enabled, Fullname, Manager) VALUES
 -- B?ng LoaiGao (5 lo?i)
 -- ==========================================
 CREATE TABLE LoaiGao (
-    MaLoai INT PRIMARY KEY,
+    MaLoai NVARCHAR PRIMARY KEY,
     TenLoai NVARCHAR(100)
 );
 

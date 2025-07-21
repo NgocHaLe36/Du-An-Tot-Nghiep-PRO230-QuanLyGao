@@ -5,11 +5,15 @@
 package gao.dao;
 
 import gao.dao.*;
+import gao.entity.NhaCungCap;
+import gao.ui.NhaCungCapController;
+import java.util.List;
 
 /**
  *
  * @author lengh
  */
-public interface NhaCungCapDAO {
-    
+public interface NhaCungCapDAO extends CrudDAO<NhaCungCap, Integer>{
+//  
+
 }
